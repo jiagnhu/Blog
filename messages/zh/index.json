@@ -1,0 +1,37 @@
+{
+  "navigation": {
+    "home": "首页",
+    "about": "关于",
+    "blog": "文章",
+    "projects": "项目",
+    "darkMode": "深色模式",
+    "lightMode": "浅色模式",
+    "switchToChinese": "切换到中文",
+    "switchToEnglish": "Switch to English"
+  },
+  "home": {
+    "greeting": "你好 👋",
+    "title": "我是一名热衷于创造优雅数字体验的开发者",
+    "intro": "我专注于构建高性能、无障碍的 Web 应用。我的工作涵盖前端开发、用户体验设计和系统架构，致力于将精心设计的界面与强大的工程实践相结合。",
+    "currentWork": "当前工作",
+    "currentWorkPeriod": "2019 — 至今",
+    "currentWorkTitle": "高级前端工程师",
+    "currentWorkDescription": "负责在一家创新科技公司构建和维护核心产品的前端架构，专注于性能优化和用户体验改进。与跨职能团队紧密合作，实施最佳实践。",
+    "skills": "技能",
+    "aboutMe": "关于我",
+    "aboutMeText1": "在过去几年中，我有机会在各种规模的公司工作——从初创公司到大型企业。这些经历教会了我如何在快速变化的环境中保持代码质量，以及如何在团队中有效协作。",
+    "aboutMeText2": "在空闲时间，我喜欢阅读技术博客、为开源项目做贡献，并探索新的技术栈。我相信持续学习是保持竞争力的关键。"
+  },
+  "blog": {
+    "title": "文章",
+    "description": "分享我在 Web 开发、技术架构和工程实践方面的思考与经验",
+    "readTime": "分钟阅读",
+    "backToList": "返回文章列表"
+  },
+  "projects": {
+    "title": "项目",
+    "description": "精选的个人和专业项目，展示我在不同领域的技术实践",
+    "viewDemo": "查看演示",
+    "viewCode": "查看代码"
+  }
+}

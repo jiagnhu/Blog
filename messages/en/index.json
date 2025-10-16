@@ -1,0 +1,37 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "projects": "Projects",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "switchToChinese": "Switch to Chinese",
+    "switchToEnglish": "Switch to English"
+  },
+  "home": {
+    "greeting": "Hello 👋",
+    "title": "I'm a developer passionate about creating elegant digital experiences",
+    "intro": "I focus on building high-performance, accessible web applications. My work spans frontend development, user experience design, and system architecture, dedicated to combining thoughtfully designed interfaces with robust engineering practices.",
+    "currentWork": "Current Work",
+    "currentWorkPeriod": "2019 — Present",
+    "currentWorkTitle": "Senior Frontend Engineer",
+    "currentWorkDescription": "Responsible for building and maintaining the frontend architecture of core products at an innovative tech company, focusing on performance optimization and user experience improvements. Working closely with cross-functional teams to implement best practices.",
+    "skills": "Skills",
+    "aboutMe": "About Me",
+    "aboutMeText1": "Over the past few years, I've had the opportunity to work at companies of various sizes—from startups to large enterprises. These experiences have taught me how to maintain code quality in rapidly changing environments and how to collaborate effectively within teams.",
+    "aboutMeText2": "In my free time, I enjoy reading technical blogs, contributing to open-source projects, and exploring new technology stacks. I believe continuous learning is key to staying competitive."
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Sharing my thoughts and experiences in web development, technical architecture, and engineering practices",
+    "readTime": "min read",
+    "backToList": "Back to Blog"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Selected personal and professional projects showcasing my technical expertise in various domains",
+    "viewDemo": "View Demo",
+    "viewCode": "View Code"
+  }
+}
