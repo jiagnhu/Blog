@@ -10,6 +10,9 @@ import { Suspense } from "react"
 import { LanguageProvider } from "@/contexts/LanguageContext"
 import { TranslationsProvider } from "@/hooks/use-translations"
 
+// 仅在 Vercel 环境下注入 Analytics，避免非 Vercel 部署产生 404
+const isVercel = process.env.VERCEL === "1"
+
 export const metadata: Metadata = {
   title: "个人博客 - 开发者作品集",
   description: "分享技术文章、项目经验和个人思考",
@@ -33,7 +36,7 @@ export default function RootLayout({
                   <main className="flex-1 px-6 py-12 md:px-12 lg:px-24 max-w-5xl">{children}</main>
                 </div>
               </Suspense>
-              <Analytics />
+              {isVercel && <Analytics />}
             </TranslationsProvider>
           </ThemeProvider>
         </LanguageProvider>
