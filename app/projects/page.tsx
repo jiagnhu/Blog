@@ -3,9 +3,8 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import { useTranslations } from "@/hooks/use-translations"
-import { useState, useEffect } from "react"
 
 const projects = [
   {
@@ -54,21 +53,16 @@ const projects = [
 ]
 
 export default function ProjectsPage() {
-  const { t } = useTranslations();
-  const [isClient, setIsClient] = useState(false);
-  
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const { t } = useTranslations()
   
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4 text-balance">
-          {isClient ? t('projects.title') : '项目'}
+          {t("projects.title")}
         </h1>
         <p className="text-muted-foreground leading-relaxed">
-          {isClient ? t('projects.description') : '精选的个人和专业项目，展示我在不同领域的技术实践'}
+          {t("projects.description")}
         </p>
       </div>
 
@@ -99,7 +93,7 @@ export default function ProjectsPage() {
                   <Button variant="outline" size="sm" asChild>
                     <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      {isClient ? t('projects.viewDemo') : '查看演示'}
+                      {t("projects.viewDemo")}
                     </a>
                   </Button>
                 )}
@@ -107,7 +101,7 @@ export default function ProjectsPage() {
                   <Button variant="outline" size="sm" asChild>
                     <a href={project.links.github} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
-                      {isClient ? t('projects.viewCode') : '源代码'}
+                      {t("projects.viewCode")}
                     </a>
                   </Button>
                 )} */}

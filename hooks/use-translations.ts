@@ -1,7 +1,19 @@
 'use client';
 
-import React, { useContext, createContext, useState, useEffect, ReactNode } from 'react';
+import {
+  createContext,
+  createElement,
+  useCallback,
+  useContext,
+  type ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { getTranslations, defaultLocale, locales, getTranslationValue } from '@/i18n';
+import defaultMessages from '@/messages/en/index.json';
+
+type Messages = Record<string, unknown>;
 
 type TranslationsContextType = {
   t: (key: string) => string;
@@ -11,62 +23,68 @@ type TranslationsContextType = {
 
 const TranslationsContext = createContext<TranslationsContextType | undefined>(undefined);
 
-// 使用React.FC明确指定这是一个React函数组件
-export const TranslationsProvider: React.FC<{children: ReactNode}> = ({children}) => {
+export function TranslationsProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState(defaultLocale);
-  const [translations, setTranslations] = useState<Record<string, any>>({});
+  const [messages, setMessages] = useState<Messages>(defaultMessages);
 
-  // 从localStorage获取语言设置
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedLocale = localStorage.getItem('language');
-      if (savedLocale && locales.includes(savedLocale)) {
-        setLocaleState(savedLocale);
-      }
+    const savedLocale =
+      typeof window !== 'undefined' ? localStorage.getItem('language') : null;
+
+    if (savedLocale && locales.includes(savedLocale)) {
+      setLocaleState(savedLocale);
     }
   }, []);
 
-  // 加载翻译
   useEffect(() => {
+    let isMounted = true;
+
     const loadTranslations = async () => {
-      const messages = await getTranslations(locale);
-      setTranslations(messages);
+      const nextMessages = await getTranslations(locale);
+      if (isMounted) {
+        setMessages(nextMessages);
+      }
     };
-    
+
     loadTranslations();
+
+    return () => {
+      isMounted = false;
+    };
   }, [locale]);
 
-  // 设置语言并保存到localStorage
-  const setLocale = (newLocale: string) => {
-    if (locales.includes(newLocale)) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('language', newLocale);
-      }
-      setLocaleState(newLocale);
-    }
-  };
+  const setLocale = useCallback((nextLocale: string) => {
+    if (!locales.includes(nextLocale)) return;
 
-  // 翻译函数
-  const t = (key: string) => {
-    // 如果翻译尚未加载完成，返回键名
-    if (Object.keys(translations).length === 0) {
-      return key;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('language', nextLocale);
     }
-    return getTranslationValue(translations, key);
-  };
 
-  // 使用对象字面量直接作为value属性值
-  return React.createElement(
-    TranslationsContext.Provider,
-    { value: { t, locale, setLocale } },
-    children
+    setLocaleState(nextLocale);
+  }, []);
+
+  const t = useMemo(() => {
+    return (key: string) => getTranslationValue(messages, key);
+  }, [messages]);
+
+  const value = useMemo(
+    () => ({
+      t,
+      locale,
+      setLocale,
+    }),
+    [t, locale, setLocale],
   );
-};
+
+  return createElement(TranslationsContext.Provider, { value }, children);
+}
 
 export function useTranslations() {
   const context = useContext(TranslationsContext);
+
   if (!context) {
     throw new Error('useTranslations must be used within a TranslationsProvider');
   }
+
   return context;
 }

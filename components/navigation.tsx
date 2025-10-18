@@ -4,35 +4,27 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Moon, Sun, Github, Linkedin, Mail, Globe } from "lucide-react"
+import { Moon, Sun, Github, Linkedin, Globe } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { useLanguage } from "@/contexts/LanguageContext"
 import { useTranslations } from "@/hooks/use-translations"
 
 export function Navigation() {
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const { locale, setLocale } = useLanguage()
-  const { t } = useTranslations()
-  const [isClient, setIsClient] = useState(false)
-  
-  // 解决服务端渲染与客户端渲染不匹配的问题
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-  
+  const { t, locale, setLocale } = useTranslations()
+
   const navItems = [
-    { href: "/", label: isClient ? t('navigation.about') : 'About' },
-    { href: "/blog", label: isClient ? t('navigation.blog') : 'Blog' },
-    { href: "/projects", label: isClient ? t('navigation.projects') : 'Projects' },
+    { href: "/", label: t("navigation.about") },
+    { href: "/blog", label: t("navigation.blog") },
+    { href: "/projects", label: t("navigation.projects") },
   ]
   
   const socialLinks = [
     { href: "https://github.com/jiagnhu", icon: Github, label: "GitHub" },
     { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
-    // { href: "mailto:hello@example.com", icon: Mail, label: "Email" },
+    { href: "https://tangyikai.top/", icon: Globe, label: "Website" },
   ]
 
   // 切换语言（不依赖路由）
@@ -101,12 +93,12 @@ export function Navigation() {
               {theme === "dark" ? (
                 <>
                   <Sun className="h-4 w-4 mr-2" />
-                  {isClient ? t('navigation.lightMode') : 'Light Mode'}
+                  {t("navigation.lightMode")}
                 </>
               ) : (
                 <>
                   <Moon className="h-4 w-4 mr-2" />
-                  {isClient ? t('navigation.darkMode') : 'Dark Mode'}
+                  {t("navigation.darkMode")}
                 </>
               )}
             </Button>
@@ -118,9 +110,7 @@ export function Navigation() {
               className="w-full"
             >
               <Globe className="h-4 w-4 mr-2" />
-              {locale === 'en' 
-                ? (isClient ? t('navigation.switchToChinese') : '切换到中文') 
-                : (isClient ? t('navigation.switchToEnglish') : 'Switch to English')}
+              {locale === "en" ? t("navigation.switchToChinese") : t("navigation.switchToEnglish")}
             </Button>
           </div>
         )}

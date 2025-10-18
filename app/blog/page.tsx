@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowUpRight } from "lucide-react"
 import { useTranslations } from "@/hooks/use-translations"
-import { useState, useEffect } from "react"
 
 const blogPosts = [
   {
@@ -50,21 +49,16 @@ const blogPosts = [
 ]
 
 export default function BlogPage() {
-  const { t } = useTranslations();
-  const [isClient, setIsClient] = useState(false);
-  
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const { t } = useTranslations()
   
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4 text-balance">
-          {isClient ? t('blog.title') : '文章'}
+          {t("blog.title")}
         </h1>
         <p className="text-muted-foreground leading-relaxed">
-          {isClient ? t('blog.description') : '分享我在 Web 开发、技术架构和工程实践方面的思考与经验'}
+          {t("blog.description")}
         </p>
       </div>
 
@@ -84,7 +78,7 @@ export default function BlogPage() {
                   <span className="text-sm text-muted-foreground">{post.date}</span>
                   <span className="text-sm text-muted-foreground">·</span>
                   <span className="text-sm text-muted-foreground">
-                    {post.readTime.split(' ')[0]} {isClient ? t('blog.readTime') : '分钟阅读'}
+                    {post.readTime.split(" ")[0]} {t("blog.readTime")}
                   </span>
                   <div className="flex flex-wrap gap-2 ml-auto">
                     {post.tags.map((tag) => (

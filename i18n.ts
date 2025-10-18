@@ -1,6 +1,3 @@
-// 不使用createIntl，因为next-intl没有导出该成员
-import { useTranslations as useNextIntlTranslations } from 'next-intl';
-
 export const locales = ['en', 'zh'];
 export const defaultLocale = 'en';
 
