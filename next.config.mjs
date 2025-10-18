@@ -1,3 +1,5 @@
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
+
 /** @type {import('next').NextConfig} */
 // @ts-ignore
 const buildTimestamp = Date.now()
@@ -16,6 +18,16 @@ const nextConfig = {
       // 为客户端产物增加时间戳，便于区分部署版本
       config.output.filename = `static/chunks/[name].[contenthash]${timestampSuffix}.js`
       config.output.chunkFilename = `static/chunks/[name].[contenthash]${timestampSuffix}.js`
+      config.plugins = config.plugins.map((plugin) => {
+        if (plugin && plugin.constructor && plugin.constructor.name === "MiniCssExtractPlugin") {
+          return new MiniCssExtractPlugin({
+            ...plugin.options,
+            filename: `static/css/[name].[contenthash]${timestampSuffix}.css`,
+            chunkFilename: `static/css/[name].[contenthash]${timestampSuffix}.css`,
+          })
+        }
+        return plugin
+      })
     }
     return config
   },
